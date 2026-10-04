@@ -83,6 +83,11 @@ bool CandidatePriorityRewriter::Rewrite(const ConversionRequest& request,
 
   bool modified = false;
   for (Segment& segment : segments->conversion_segments()) {
+    // Keeps the candidate the user has already chosen.
+    if (segment.segment_type() == Segment::FIXED_VALUE) {
+      continue;
+    }
+
     // Collects (candidate, rank) pairs first, since moving candidates changes
     // their indices.
     std::vector<std::pair<const converter::Candidate*, int>> targets;

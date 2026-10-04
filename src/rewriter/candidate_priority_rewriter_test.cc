@@ -127,6 +127,18 @@ TEST_F(CandidatePriorityRewriterTest, MatchesContentValue) {
   EXPECT_EQ(GetCandidates(*segment), "二季は 二期は");
 }
 
+TEST_F(CandidatePriorityRewriterTest, FixedSegmentIsNotRewritten) {
+  ASSERT_TRUE(rewriter_.LoadFromString("にき\t仁木\t1\n"));
+
+  Segments segments;
+  Segment* fixed = AddSegment("にき", {"二期", "二季", "仁木"}, &segments);
+  fixed->set_segment_type(Segment::FIXED_VALUE);
+  const Segment* free = AddSegment("にき", {"二期", "二季", "仁木"}, &segments);
+  EXPECT_TRUE(rewriter_.Rewrite(request_, &segments));
+  EXPECT_EQ(GetCandidates(*fixed), "二期 二季 仁木");
+  EXPECT_EQ(GetCandidates(*free), "仁木 二期 二季");
+}
+
 TEST_F(CandidatePriorityRewriterTest, InvalidLinesAreIgnored) {
   EXPECT_FALSE(rewriter_.LoadFromString(
       "にき\t二期\n"
