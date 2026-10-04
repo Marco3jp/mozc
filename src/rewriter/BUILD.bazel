@@ -1557,8 +1557,8 @@ mozc_cc_library(
     ],
     deps = [
         ":a11y_description_rewriter",
-        ":candidate_priority_rewriter",
         ":calculator_rewriter",
+        ":candidate_priority_rewriter",
         ":collocation_rewriter",
         ":command_rewriter",
         ":correction_rewriter",
