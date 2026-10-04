@@ -41,6 +41,7 @@
 #include "engine/modules.h"
 #include "rewriter/a11y_description_rewriter.h"
 #include "rewriter/calculator_rewriter.h"
+#include "rewriter/candidate_priority_rewriter.h"
 #include "rewriter/collocation_rewriter.h"
 #include "rewriter/correction_rewriter.h"
 #include "rewriter/dice_rewriter.h"
@@ -195,6 +196,8 @@ Rewriter::Rewriter(const engine::Modules& modules) {
   AddRewriter(make_unique_from_tuples<EnvironmentalFilterRewriter>(
       data_manager.GetEmojiRewriterData()));
   AddRewriter(std::make_unique<RemoveRedundantCandidateRewriter>());
+  // Runs after the history rewriters so that the user-defined priority wins.
+  AddRewriter(std::make_unique<CandidatePriorityRewriter>());
   AddRewriter(make_unique_from_tuples<A11yDescriptionRewriter>(
       data_manager.GetA11yDescriptionRewriterData()));
 }
