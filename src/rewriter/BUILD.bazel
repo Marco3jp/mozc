@@ -884,6 +884,41 @@ mozc_cc_test(
 )
 
 mozc_cc_library(
+    name = "candidate_priority_rewriter",
+    srcs = ["candidate_priority_rewriter.cc"],
+    hdrs = ["candidate_priority_rewriter.h"],
+    deps = [
+        ":rewriter_interface",
+        "//base:file_util",
+        "//base:system_util",
+        "//converter:segments",
+        "//request:conversion_request",
+        "@com_google_absl//absl/algorithm:container",
+        "@com_google_absl//absl/container:flat_hash_map",
+        "@com_google_absl//absl/log",
+        "@com_google_absl//absl/status:statusor",
+        "@com_google_absl//absl/strings",
+    ],
+    alwayslink = 1,
+)
+
+mozc_cc_test(
+    name = "candidate_priority_rewriter_test",
+    size = "small",
+    srcs = ["candidate_priority_rewriter_test.cc"],
+    deps = [
+        ":candidate_priority_rewriter",
+        "//base:file_util",
+        "//base:system_util",
+        "//converter:segments",
+        "//request:conversion_request",
+        "//testing:gunit_main",
+        "//testing:mozctest",
+        "@com_google_absl//absl/strings",
+    ],
+)
+
+mozc_cc_library(
     name = "dictionary_generator",
     srcs = [
         "dictionary_generator.cc",
@@ -1523,6 +1558,7 @@ mozc_cc_library(
     deps = [
         ":a11y_description_rewriter",
         ":calculator_rewriter",
+        ":candidate_priority_rewriter",
         ":collocation_rewriter",
         ":command_rewriter",
         ":correction_rewriter",

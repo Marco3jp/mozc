@@ -277,10 +277,10 @@ OK:	こきゅう	呼吸	Conversion Expected 9	枯朽	2.28.5000
 OK:	こうばいりょくへいか	購買力平価	Conversion Expected	購買力平価	2.28.5000
 FAILED:	ろーまじぶんをかく	ローマ字分を書く	Conversion Expected	ローマ字文を書く	2.32.5981
 FAILED:	かんじかなまじりぶん	感じかな混じり分	Conversion Match	文	2.32.5981
-FAILED:	にせんえんさつ	にせん円札	Conversion Expected 2	二千円札	2.32.5981
+FAILED:	にせんえんさつ	に千円札	Conversion Expected 2	二千円札	3.34.6239
 FAILED:	ごせんえんさつ	互選円札	Conversion Expected 2	五千円札	2.32.5981
 FAILED:	ごひゃくえんさつ	御百円札	Conversion Expected 2	五百円札	2.32.5981
-FAILED:	にせんえんさつ	にせん円札	Conversion Expected 9	2千円札	2.32.5981
+FAILED:	にせんえんさつ	に千円札	Conversion Expected 9	2千円札	3.34.6239
 FAILED:	ごせんえんさつ	互選円札	Conversion Expected 9	5千円札	2.32.5981
 FAILED:	ごひゃくえんさつ	御百円札	Conversion Expected 9	5百円札	2.32.5981
 FAILED:	たいをなす	タイをなす	Conversion Match	体を	2.32.5981
@@ -391,7 +391,7 @@ OK:	みぬめじんじゃ	敏馬神社	Conversion Expected 9	敏馬神社	2.30.5
 FAILED:	みるめ	見る目	Conversion Expected 9	敏馬	2.30.5520
 OK:	みるめじんじゃ	敏馬神社	Conversion Expected 9	敏馬神社	2.30.5520
 OK:	けつりょう	結了	Conversion Expected 9	結了	2.30.5520
-FAILED:	にかんじ	二感じ	Conversion Expected 99	二簡字	2.30.5520
+FAILED:	にかんじ	に感じ	Conversion Expected 99	二簡字	3.34.6239
 FAILED:	ころんびあ	コロンビア	Conversion Expected 5	Colombia	2.30.5544
 OK:	はくしかてい	博士課程	Conversion Expected	博士課程	2.30.5544
 OK:	いねこき	稲核	Conversion Expected 9	稲㧡	2.30.5544
@@ -476,7 +476,7 @@ OK:	まいとしこうれい	毎年恒例	Conversion Expected	毎年恒例	2.30.
 FAILED:	まんがよんだり	マンが読んだり	Conversion Expected	漫画読んだり	2.30.5618
 FAILED:	じんこうにかいしゃする	人口にかいしゃする	Conversion Expected	人口に膾炙する	3.33.6133
 FAILED:	いいごえんがあれば	いい御縁があれば	Conversion Expected	いいご縁があれば	2.30.5618
-FAILED:	にせんえんさつ	にせん円札	Conversion Expected	二千円札	2.30.5618
+FAILED:	にせんえんさつ	に千円札	Conversion Expected	二千円札	3.34.6239
 FAILED:	ごせんえんさつ	互選円札	Conversion Expected	五千円札	2.30.5618
 FAILED:	いちまんえんさつ	糸満円札	Conversion Expected	一万円札	2.30.5618
 OK:	いちまん	一万	Conversion Expected	一万	2.31.5851
@@ -542,8 +542,8 @@ FAILED:	れいしょう	冷笑	Conversion Expected 99	0勝	2.31.5810
 OK:	れいしょう	冷笑	Conversion Expected 99	冷笑	2.31.5810
 OK:	いっかい	一回	Conversion Expected 99	1階	2.31.5810
 OK:	いっかい	一回	Conversion Expected 99	一介	2.31.5810
-OK:	にじ	二時	Conversion Expected 99	2時	2.31.5810
-FAILED:	にじ	二時	Conversion Expected 99	虹	2.31.5810
+OK:	にじ	虹	Conversion Expected 99	2時	3.34.6239
+OK:	にじ	虹	Conversion Expected 99	虹	3.34.6239
 OK:	さんしゅう	三周	Conversion Expected 99	3週	2.31.5810
 OK:	さんしゅう	三周	Conversion Expected 99	参集	2.31.5810
 OK:	よじ	よじ	Conversion Expected 99	4時	2.31.5810

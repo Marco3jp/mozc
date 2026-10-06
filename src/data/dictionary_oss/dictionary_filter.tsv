@@ -4,3 +4,5 @@
 おみ	お見
 はんにゃしんきょう	般若心経
 よね([づず]げ|ずけ)んし	米津玄師
+# [custom] Prevents the particle "に" from being converted to "2".
+に	2
