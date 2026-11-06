@@ -1,8 +1,21 @@
 name: CI for macOS
 # https://github.com/google/mozc/blob/master/docs/build_mozc_in_osx.md
 
-# Run on push.
-on: push
+# Run on merges to custom (arm64 build only).
+on:
+  push:
+    branches:
+      - custom
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  # Manual run. Set "full" to also run the jobs that are skipped on merge.
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 'Run all jobs (other architectures, tests)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -55,6 +68,8 @@ jobs:
           if-no-files-found: warn
 
   build_intel64:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-26-arm64-Readme.md
     runs-on: macos-26
     timeout-minutes: 60
@@ -96,6 +111,8 @@ jobs:
           if-no-files-found: warn
 
   build_universal_binary:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-26-arm64-Readme.md
     runs-on: macos-26
     timeout-minutes: 90
@@ -137,6 +154,8 @@ jobs:
           if-no-files-found: warn
 
   test:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-26-arm64-Readme.md
     runs-on: macos-26
     timeout-minutes: 60
@@ -183,6 +202,8 @@ jobs:
   # in other jobs. Another approach would be to use "needs:".
   # https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow
   cache_deps:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-26-arm64-Readme.md
     runs-on: macos-26
     timeout-minutes: 15

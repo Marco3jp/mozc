@@ -1,10 +1,28 @@
 name: CI for Linux
 # https://github.com/google/mozc/blob/master/docs/build_mozc_for_linux.md
 
-# Run on push and pull request.
+# Build on PRs and merges to custom. Tests run only on manual dispatch
+# (run them locally: see docs/ci_custom.md).
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - custom
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  pull_request:
+    branches:
+      - custom
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  # Manual run. Set "full" to also run the jobs that are skipped on merge.
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 'Run all jobs (other architectures, tests)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -49,6 +67,8 @@ jobs:
           if-no-files-found: warn
 
   test:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2604-Readme.md
     runs-on: ubuntu-26.04
     timeout-minutes: 60
@@ -74,13 +94,13 @@ jobs:
           bazelisk test ... -c dbg --build_tests_only --test_output=errors --build_event_json_file=bep.jsonl
 
       - name: Collect failing test logs
-        if: failure() && github.event_name == 'push'
+        if: failure()
         working-directory: ./src
         run: |
           python3 build_tools/collect_test_logs.py --bep bep.jsonl --out "${GITHUB_WORKSPACE}/test_logs"
 
       - name: Upload failing test logs
-        if: failure() && github.event_name == 'push'
+        if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         with:
           name: test-logs-${{ runner.os }}

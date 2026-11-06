@@ -1,8 +1,21 @@
 name: CI for Windows
 # https://github.com/google/mozc/blob/master/docs/build_mozc_in_windows.md
 
-# Run on push.
-on: push
+# Run on merges to custom (x64 build only).
+on:
+  push:
+    branches:
+      - custom
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  # Manual run. Set "full" to also run the jobs that are skipped on merge.
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 'Run all jobs (other architectures, tests)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -67,6 +80,8 @@ jobs:
           if-no-files-found: warn
 
   build_universal_on_x64:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-Readme.md
     runs-on: windows-2025
     timeout-minutes: 120
@@ -120,6 +135,8 @@ jobs:
           if-no-files-found: warn
 
   build_on_arm64:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/windows/Windows11-Arm64-Readme.md
     runs-on: windows-11-arm
     timeout-minutes: 120
@@ -173,6 +190,8 @@ jobs:
           if-no-files-found: warn
 
   test_on_x64:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-Readme.md
     runs-on: windows-2025
     timeout-minutes: 120
@@ -221,6 +240,8 @@ jobs:
           if-no-files-found: ignore
 
   test_on_arm64:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/windows/Windows11-Arm64-Readme.md
     runs-on: windows-11-arm
     timeout-minutes: 120
@@ -272,6 +293,8 @@ jobs:
   # in other jobs. Another approach would be to use "needs:".
   # https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow
   cache_deps_on_x64:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-Readme.md
     runs-on: windows-2025
     timeout-minutes: 15
@@ -300,6 +323,8 @@ jobs:
   # in other jobs. Another approach would be to use "needs:".
   # https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow
   cache_deps_on_arm64:
+    # Skipped on merge to save CI minutes. Run manually with full=true.
+    if: ${{ inputs.full }}
     # https://github.com/actions/runner-images/blob/main/images/windows/Windows11-Arm64-Readme.md
     runs-on: windows-11-arm
     timeout-minutes: 15

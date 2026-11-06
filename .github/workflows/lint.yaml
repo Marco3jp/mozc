@@ -1,8 +1,21 @@
 name: CI for Lint checks
 # https://github.com/google/mozc/blob/master/docs/build_mozc_in_docker.md
 
-# Run on push.
-on: push
+# Run on PRs and merges to custom.
+on:
+  push:
+    branches:
+      - custom
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  pull_request:
+    branches:
+      - custom
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
