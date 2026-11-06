@@ -94,13 +94,13 @@ jobs:
           bazelisk test ... -c dbg --build_tests_only --test_output=errors --build_event_json_file=bep.jsonl
 
       - name: Collect failing test logs
-        if: failure() && github.event_name == 'push'
+        if: failure()
         working-directory: ./src
         run: |
           python3 build_tools/collect_test_logs.py --bep bep.jsonl --out "${GITHUB_WORKSPACE}/test_logs"
 
       - name: Upload failing test logs
-        if: failure() && github.event_name == 'push'
+        if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
         with:
           name: test-logs-${{ runner.os }}
